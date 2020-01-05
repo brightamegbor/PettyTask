@@ -1,0 +1,28 @@
+.header {
+    background-color: #fcfcfc;
+}
+
+.border-2 {
+    padding: 1rem;
+    // border: 1px solid #c2c3c4;
+    border-radius: 2px;
+    box-shadow: 0 0 2px #1c1c1d;
+    background-color: #fcfcfc;
+      
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    text-transform: capitalize;
+  }
+  
+  .radio-button {
+    margin: 5px;
+    margin-right: 3rem;
+  }
+
+  .mat-radio-outer-circle {
+    border-color: #333 !important;
+}

@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span>Petty Task</span>
+
+        <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+            <ul class="navigation-items" fxLayout fxLayoutGap="20px">
+                <li>
+                    <a routerLink="/" class="nav-link">Completed Tasks </a>
+                </li>
+                <li>
+                    <a routerLink="/" class="nav-link">My Jobs </a>
+                </li>
+                <li>
+                    <a routerLink="/deposit" class="nav-link">Deposit </a>
+                </li>
+                <li>
+                    <a routerLink="/withdraw" class="nav-link">Withdraw </a>
+                </li>
+                <li>
+                    <a routerLink="/account/profile" class="nav-link">Profile </a>
+                </li>
+            </ul>
+        </div>
+
+    </mat-toolbar-row>
+    <div>
+        <a routerLink="/">Home</a>
+    </div>
+    
+</mat-toolbar>

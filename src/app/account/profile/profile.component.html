@@ -1,0 +1,106 @@
+<div class="container">
+    <p class="">Profile</p>
+
+    <div class="mt-2 font-sm">
+        <span style="font-weight: bold;">$0.00</span> &mdash; account balance
+        <span class="p-1"><button mat-flat-button>
+            <a >My Jobs</a>
+        </button></span>
+        <span class="p-1"><button mat-flat-button [routerLink]="['/createtask']" routerLinkActive="router-link-active" >
+            Create a Job
+        </button></span>
+        <span class="p-1"><button mat-flat-button>
+            <a >Deposit</a>
+        </button></span>
+        <span class="p-1"><button mat-flat-button>
+            <a >Withdraw</a>
+        </button></span>
+    </div>
+
+    <div class="mt-3 border-1 font-sm">
+        <p style="font-weight: bold;">Personal Details</p>
+        <hr />
+        <div class="mt-2 p-1">
+            <div class="pb-1">
+                <p>Full name</p>
+                {{details?.user.name }}
+            </div>
+            <hr />
+
+            <div class="pb-1">
+                Company: 
+                <span>{{ details?.user.company }}</span>
+                <span style="color: rgb(77, 77, 224); cursor: pointer;" class="ml-1"><a (click)="openDialog('company')">change</a></span>
+
+            </div>
+            <hr />
+
+            <div class="pb-1">
+                
+            <p>Address: </p>
+            <span>{{ details?.user.address }}</span>
+            <span style="color: rgb(77, 77, 224); cursor: pointer;" class="ml-1"><a (click)="openDialog('address')">change</a></span>
+
+            </div>
+            <hr />
+
+            <div class="pb-1">
+                
+            <p>Zip Code: </p>
+            <span>{{ details?.user.zip_code }}</span>
+            <span style="color: rgb(77, 77, 224); cursor: pointer;" class="ml-1"><a (click)="openDialog('zipCode')">change</a></span>
+
+            </div>
+            <hr />
+
+            <div class="pb-1">
+                
+            <p>City: </p>
+            <span>{{ details?.user.city }}</span>
+            <span style="color: rgb(77, 77, 224); cursor: pointer;" class="ml-1"><a (click)="openDialog('city')">change</a></span>
+
+            </div>
+            <hr />
+
+            <div class="pb-1">
+                
+            <p>State/Region: </p>
+            <span>{{ details?.user.state_region }}</span>
+            <span style="color: rgb(77, 77, 224); cursor: pointer;" class="ml-1"><a (click)="openDialog('stateRegion')">change</a></span>
+
+            </div>
+            <hr />
+
+            <div class="pb-1">
+                
+            <p>Country: </p>
+            <span>{{ details?.user.country }}</span>
+            <span style="color: rgb(77, 77, 224); cursor: pointer;" class="ml-1"><a (click)="openDialog('country')">change</a></span>
+
+            </div>
+            <hr />
+
+            <div class="pb-1">
+                
+            <p>Phone number: 0{{ details?.user.phone_number }}</p>
+            </div>
+            <hr />
+
+            <div class="pb-1">
+                
+            <p>Email: {{details?.user.email }}</p>
+            </div>
+            <hr />
+
+
+            <div class="pb-1">
+                <p>Password: 
+                    <span style="font-weight: bold;">
+                        **********
+                    </span><span><a href="">change</a></span>
+                </p>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>

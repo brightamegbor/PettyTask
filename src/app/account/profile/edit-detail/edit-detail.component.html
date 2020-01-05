@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Details </h1>
+
+<div mat-dialog-content>
+    <p>Enter your detail below</p>
+    <mat-form-field appearance="outline" *ngIf="isCompany">
+        <mat-label>company</mat-label>
+        <input matInput placeholder="company"
+        type="text" name="company" autofocus="true" [(ngModel)]="credentials.company">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="isAddress">
+        <mat-label>address</mat-label>
+        <input matInput placeholder="address"
+        type="text" name="address" autofocus="true" [(ngModel)]="credentials.address">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="isZip">
+        <mat-label>zipcode</mat-label>
+        <input matInput placeholder="zipcode"
+        type="text" name="zip_code" autofocus="true" [(ngModel)]="credentials.zip_code">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" *ngIf="isCity">
+        <mat-label>City</mat-label>
+        <input matInput placeholder="city"
+        type="text" name="city" autofocus="true" [(ngModel)]="credentials.city">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" *ngIf="isRegion">
+        <mat-label>state/region</mat-label>
+        <input matInput placeholder="state/region"
+        type="text" name="state_region" autofocus="true" [(ngModel)]="credentials.state_region">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" *ngIf="isCountry">
+        <mat-label>country</mat-label>
+        <input matInput placeholder="country"
+        type="text" name="country" autofocus="true" [(ngModel)]="credentials.country">
+    </mat-form-field>
+
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onSave()" cdkFocusInitial>Save</button>
+</div>

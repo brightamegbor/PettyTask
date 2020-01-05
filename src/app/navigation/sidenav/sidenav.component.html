@@ -1,0 +1,58 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false" fxHide.lg>
+    <mat-toolbar *ngIf="authService.isLoggedIn()">Menu</mat-toolbar>
+    <mat-nav-list *ngIf="authService.isLoggedIn()">
+      <a mat-list-item [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a>
+      <a mat-list-item [routerLink]="['/']" routerLinkActive="router-link-active" >Completed Tasks</a>
+      <a mat-list-item href="#">My Jobs</a>
+      <a mat-list-item href="#">Deposit</a>
+      <a mat-list-item href="#">Withdraw</a>
+      <a mat-list-item [routerLink]="['/account/profile']" routerLinkActive="router-link-active">Profile</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" *ngIf="authService.isLoggedIn()">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>PettyTask</span>
+
+      <div class="menu-lg mx-auto" fxLayout="row" fxLayoutAlign="flex-end" fxHide.xs>
+        <a mat-list-item [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a>
+        <a mat-list-item [routerLink]="['/']" routerLinkActive="router-link-active" >Completed Tasks</a>
+        <a mat-list-item href="#">My Jobs</a>
+        <a mat-list-item href="#">Deposit</a>
+        <a mat-list-item href="#">Withdraw</a>
+        <a mat-list-item [routerLink]="['/account/profile']" routerLinkActive="router-link-active">Profile</a>
+      </div>
+      
+    </mat-toolbar>
+    <div class="font-sm header" *ngIf="authService.isLoggedIn()">
+      <div class="p-4 float-right d-flex align-items-end flex-column">
+        <button mat-flat-button color="accent" (click)="authService.logout()">
+          Logout</button>
+      </div>
+    
+      <div class="p-4 d-flex align-items-start flex-column">
+        <p style="font-weight: bold;">{{ details?.user.name }}</p>
+        <p>Account Bal: <span style="font-weight: bold;">$0.00</span></p>
+        <p>{{ details?.user.email }}</p>
+      </div>
+
+      <hr />
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <app-footer></app-footer>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>
