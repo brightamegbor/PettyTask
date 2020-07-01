@@ -1,0 +1,75 @@
+.card {
+  width: 270px;
+  height: 220px;
+}
+
+.card a {
+  text-decoration: none;
+  border: none;
+  clear: both;
+}
+
+.card:hover {
+  border: 1px solid rgb(185, 185, 185);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  cursor: pointer;
+}
+
+.custom-card-header {
+  max-width: 270px;
+  height: 100px;
+  box-sizing: border-box;
+}
+
+.card img {
+  max-width: 100%;
+  object-fit: cover;
+  max-height: 100%;
+}
+
+.mat-card-content {
+  object-fit: cover;
+  max-height: 100%;
+}
+
+.custom-font-user-amount {
+  font-size: 11px;
+  margin-top: 0 !important;
+  padding-top: 1px !important;
+}
+
+.custom-title {
+  font-size: small;
+}
+
+.text-with-line {
+  line-height: 0.5;
+  text-align: center;
+}
+
+.text-with-line span {
+  line-height: 0.5;
+  display: inline-block;
+  position: relative;
+}
+
+.text-with-line span:before,
+.text-with-line span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid #c2c1c1;
+  //   border-top: 1px solid #333;
+  top: 0;
+  width: 150px;
+}
+
+.text-with-line span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.text-with-line span:after {
+  left: 100%;
+  margin-left: 15px;
+}

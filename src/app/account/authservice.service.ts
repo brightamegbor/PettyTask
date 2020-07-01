@@ -1,8 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { map } from "rxjs/operators";
+import { Router } from "@angular/router";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Access-Control-Allow-Origin": "*",
+  }),
+};
 
 export interface userDetails {
   id: number;
@@ -47,7 +53,7 @@ export interface ConfirmPassword {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
   private token: string;
@@ -55,17 +61,16 @@ export class AuthService {
   username: string;
   password: string;
 
-  constructor(private http: HttpClient,
-              private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   private saveToken(token: string): void {
-    localStorage.setItem('userToken', token);
+    localStorage.setItem("userToken", token);
     this.token = token;
   }
 
   private getToken(): string {
     if (!this.token) {
-      this.token = localStorage.getItem('userToken');
+      this.token = localStorage.getItem("userToken");
     }
     return this.token;
   }
@@ -74,7 +79,7 @@ export class AuthService {
     const token = this.getToken();
     let payload;
     if (token) {
-      payload = token.split('.')[1];
+      payload = token.split(".")[1];
       payload = window.atob(payload);
       return JSON.parse(payload);
     } else {
@@ -93,7 +98,10 @@ export class AuthService {
 
   public register(user: TokenPayload): Observable<any> {
     const base = this.http.post(`/api/register`, user, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
     });
 
     const request = base.pipe(
@@ -110,10 +118,14 @@ export class AuthService {
   public login(user: TokenPayload): Observable<any> {
     const base = this.http.post(
       `/api/login`,
-      {email: user.email, password: user.password },
+      { email: user.email, password: user.password },
       {
-        headers: { 'Content-Type': 'application/json' }
-      });
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     console.log(user);
 
@@ -130,23 +142,27 @@ export class AuthService {
 
   public profile(): Observable<any> {
     return this.http.get(`/api/profile`, {
-      headers: { Authorization: `Bearer ${this.getToken()}` }
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${this.getToken()}`,
+      },
     });
   }
 
   public updateProfile(detail: DialogData): Observable<any> {
     const base = this.http.post(`/api/updateprofile`, detail, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
     });
 
     return base;
   }
 
   public logout(): void {
-    this.token = '';
-    window.localStorage.removeItem('userToken');
-    this.router.navigateByUrl('/account/login');
+    this.token = "";
+    window.localStorage.removeItem("userToken");
+    this.router.navigateByUrl("/account/login");
   }
-
-
 }

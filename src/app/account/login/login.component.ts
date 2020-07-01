@@ -1,11 +1,11 @@
-import { Router } from '@angular/router';
-import { AuthService, TokenPayload } from './../authservice.service';
-import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { AuthService, TokenPayload } from "./../authservice.service";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   isInvalidCredentials: boolean;
@@ -13,42 +13,38 @@ export class LoginComponent implements OnInit {
 
   credentials: TokenPayload = {
     id: 0,
-    name: '',
+    name: "",
     phone_number: null,
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   };
   busy: boolean;
 
-  constructor(private authService: AuthService,
-              private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
     this.busy = true;
     this.isInvalidCredentials = false;
     this.isFieldEmpty = false;
 
-    if (this.credentials.email === '' || this.credentials.password === '') {
+    if (this.credentials.email === "" || this.credentials.password === "") {
       this.isFieldEmpty = true;
       this.busy = false;
     } else {
       this.authService.login(this.credentials).subscribe(
         () => {
-          this.router.navigateByUrl('/account/profile');
+          this.router.navigateByUrl("/home");
         },
-        err => {
+        (err) => {
           console.log(err);
-          if (err['error'].error === 'invalid_credential') {
+          if (err["error"].error === "invalid_credential") {
             this.isInvalidCredentials = true;
             this.busy = false;
           }
         }
       );
     }
-
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -1,113 +1,147 @@
 <div class="container">
+  <p>
+    <span><a href="">My Jobs</a> :</span>
+    <span style="font-weight: bold;"> Create a task</span>
+  </p>
+  <hr />
 
-    <p>
-        <span><a href="">My Jobs</a> :</span> 
-        <span style="font-weight: bold;"> Create a task</span>
+  <div class="border-2">
+    <p class="font-sm">
+      All tasks submitted are reviewed for approval. Reviews could take more
+      than 24 hours. Make sure to add all details about the task to make it easy
+      for customers to understand.
     </p>
-    <hr/>
 
-    <div class="border-2">
-        <p class="font-sm">All tasks submitted are reviewed for approval. Reviews could take more than 24 hours. Make sure
-            to add all details about the task to make it easy for customers to understand.
-        </p>
+    <p class="mt-3" style="font-weight: bold;">Select task target group</p>
 
-        <p class="mt-3" style="font-weight: bold;">Select task target group</p>
-    
-        <form>
-            <!-- <mat-form-field appearance="standard">
+    <form #f="ngForm" (ngSubmit)="submitTask()">
+      <!-- <mat-form-field appearance="standard">
                 <span>Campus based: </span>   
                 <input type="radio" name="campus" id="campus">
                 <span class="ml-3">Non Campus (Region): </span>  
                 <input type="radio" name="region" id="region">
             </mat-form-field> -->
-            <mat-radio-group
-                aria-labelledby="radio-group-label"
-                class="radio-group" color="primary"  
-                [formControl]="showSelect">
-                <mat-radio-button 
-                class="radio-button" 
-                *ngFor="let target of targets"
-                [value]="target">
-                    {{target}}
-                </mat-radio-button>
-                
-            </mat-radio-group> <br/>
+      <mat-radio-group
+        class="radio-group"
+        color="primary"
+        name="type"
+        [(ngModel)]="createTask.type"
+      >
+        <mat-radio-button
+          class="radio-button"
+          value="campus"
+          checked="campus"
+          (click)="setradio('campus')"
+        >
+          Campus
+        </mat-radio-button>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Choose a School</mat-label>
-                <mat-select>
-                    <mat-option 
-                    *ngFor="let school of schools" 
-                    [value]="school"
-                    [name]="school"
-                    [(ngModel)]="binding">
-                    {{school}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field> <br/>
+        <mat-radio-button
+          class="radio-button"
+          value="region"
+          (click)="setradio('region')"
+        >
+          Region
+        </mat-radio-button>
+      </mat-radio-group>
+      <br />
 
-            <mat-form-field appearance="outline" *ngIf="showSelect.value">
-                <mat-label>Choose a region</mat-label>
-                <mat-select>
-                    <mat-option 
-                    *ngFor="let region of regions" 
-                    [value]="region"
-                    [name]="region"
-                    [(ngModel)]="binding">
-                    {{region}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field><br/>
+      <mat-form-field appearance="outline">
+        <div *ngIf="isSelected('campus')">
+          <mat-label>Choose a School</mat-label>
+          <mat-select name="campusValue" [(ngModel)]="createTask.typeValue">
+            <mat-option *ngFor="let school of schools" [value]="school">
+              {{ school }}
+            </mat-option>
+          </mat-select>
+        </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Choose a category</mat-label>
-                <mat-select>
-                    <mat-option 
-                    *ngFor="let category of categories" 
-                    [value]="category"
-                    [name]="category"
-                    [(ngModel)]="binding">
-                    {{category}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field><br/>
+        <div *ngIf="isSelected('region')">
+          <mat-label>Choose a region</mat-label>
+          <mat-select name="regionValue" [(ngModel)]="createTask.typeValue">
+            <mat-option *ngFor="let region of regions" [value]="region">
+              {{ region }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </mat-form-field>
+      <br />
 
-            <mat-form-field appearance="outline">
-                <mat-label>Job Title</mat-label>
-                <input matInput type="text" 
-                name="title" [(ngModel)]="binding">
-            </mat-form-field><br/>
+      <!-- <mat-form-field appearance="outline" *ngIf="isSelected('region')">
+        <mat-label>Choose a region</mat-label>
+        <mat-select>
+          <mat-option
+            *ngFor="let region of regions"
+            [value]="region"
+            [name]="region"
+            [(ngModel)]="binding"
+          >
+            {{ region }}
+          </mat-option>
+        </mat-select> </mat-form-field
+      ><br /> -->
 
-            <mat-form-field appearance="outline">
-                <mat-label>Position Available</mat-label>
-                <input matInput type="text" 
-                name="available_position" [(ngModel)]="binding">
-            </mat-form-field><br/>
+      <mat-form-field appearance="outline">
+        <mat-label>Choose a category</mat-label>
+        <mat-select name="category" [(ngModel)]="createTask.category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select> </mat-form-field
+      ><br />
 
-            <mat-form-field appearance="outline">
-                <mat-label>Amount per job</mat-label>
-                <input matInput type="number" 
-                name="amount" [(ngModel)]="binding">
-            </mat-form-field><br/>
+      <mat-form-field appearance="outline">
+        <mat-label>Job Title</mat-label>
+        <input
+          matInput
+          type="text"
+          name="jobTitle"
+          [(ngModel)]="createTask.jobTitle"
+        /> </mat-form-field
+      ><br />
 
-               Attached file (optional): <input type="file" name="attached"
-                [(ngModel)]="binding"><br/><br/>
+      <mat-form-field appearance="outline">
+        <mat-label>Position Available</mat-label>
+        <input
+          matInput
+          type="text"
+          name="position"
+          [(ngModel)]="createTask.position"
+        /> </mat-form-field
+      ><br />
 
-            <mat-form-field appearance="outline">
-                <mat-label>Description</mat-label>
-                <textarea matInput
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="5"
-                name="description"
-                [(ngModel)]="binding"></textarea>
-            </mat-form-field><br/>
+      <mat-form-field appearance="outline">
+        <mat-label>Amount per job</mat-label>
+        <input
+          matInput
+          type="number"
+          name="amount"
+          [(ngModel)]="createTask.amount"
+        /> </mat-form-field
+      ><br />
 
-            <button mat-flat-button type="submit" color="primary">Submit</button>
-            
-            
-        </form>
-    </div>
+      Attached file (optional):
+      <input
+        type="file"
+        name="attachment"
+        [(ngModel)]="createTask.attachment"
+      /><br /><br />
 
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="6"
+          name="description"
+          [(ngModel)]="createTask.description"
+          name="description"
+        ></textarea></mat-form-field
+      ><br />
+
+      <button mat-flat-button type="submit" color="primary">Submit</button>
+    </form>
+  </div>
 </div>
